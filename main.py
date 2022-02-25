@@ -76,26 +76,6 @@ def get_file_id_list(soup: BeautifulSoup) -> list:
     return arr_img_url
 
 
-def is_exist_url_in_file(list_url: str, path: str, isFile: bool) -> bool:
-    chk = False
-    if os.path.isfile(path):
-        # すでに読み込み済みのURLかどうかチェック
-        with open(path, 'r') as ro_files:
-            for file_url in ro_files:
-                file_url = file_url.strip()
-                # 既に一覧全ての画像をDL済みの場合は次のループへ
-                if list_url == file_url:
-                    chk = True
-                    message = 'skipped：' + file_url
-                    if isFile:
-                        # ログを見やすくするためにインデント追加
-                        message = '  ' + message
-                    LOGGER.info(message)
-
-                    break
-    return chk
-
-
 def save_images(save_path: str, file_info_json: str) -> bool:
     file_name = str(file_info_json['file_id']) + "_" + file_info_json['filename']
     file_path = '{}/{}'.format(save_path, file_name)
