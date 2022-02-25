@@ -1,0 +1,5 @@
+# downloadフォルダは登録しない
+download/
+*.html
+__pycache__/
+.idea/
